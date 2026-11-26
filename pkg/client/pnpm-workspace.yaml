@@ -1,0 +1,5 @@
+onlyBuiltDependencies:
+  - "gorth-base-primitive"
+  - "gorth-base-structure"
+  - "esbuild"
+  - "unrs-resolver"
