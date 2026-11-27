@@ -21,7 +21,8 @@ export default defineConfig({
   alias: { "@": import.meta.dirname },
   devServer: { port: Number(port) || 5056, hostname: "0.0.0.0" },
   experimental: { tasks: true },
-  scheduledTasks: {"0 * * * *":"background:maintenance"},
+  // Vercel Hobby supports daily cron schedules.
+  scheduledTasks: { "0 0 * * *": "background:maintenance" },
   vercel: {
     entryFormat: "web",
     functions: { runtime: "nodejs24.x", maxDuration: 300 },
