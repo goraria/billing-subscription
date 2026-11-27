@@ -1,4 +1,4 @@
-import type { ApiContext } from "@/types/auth"
+import type { Event } from "@/utils/interface"
 import { getQueryValues, readRequestBody } from "@/utils/request"
 import { uuidSchema } from "@/schemas/common"
 import {
@@ -14,7 +14,7 @@ import {
   rawResumeSubscription as resumeSubscriptionServices,
 } from "@/models/subscriptions"
 
-export async function actListSubscriptions(context: ApiContext) {
+export async function actListSubscriptions(context: Event) {
   return context.json(
     await listSubscriptionsServices(
       listSubscriptionSchema.parse(getQueryValues(context.req.raw)),
@@ -23,7 +23,7 @@ export async function actListSubscriptions(context: ApiContext) {
     { headers: { "content-type": "application/json; charset=UTF-8" } }
   )
 }
-export async function actGetSubscription(context: ApiContext) {
+export async function actGetSubscription(context: Event) {
   return context.json(
     await getSubscriptionServices(
       uuidSchema.parse(context.req.param("id")!),
@@ -32,7 +32,7 @@ export async function actGetSubscription(context: ApiContext) {
     { headers: { "content-type": "application/json; charset=UTF-8" } }
   )
 }
-export async function actCreateSubscription(context: ApiContext) {
+export async function actCreateSubscription(context: Event) {
   return context.json(
     await createSubscriptionServices(
       createSubscriptionSchema.parse(await readRequestBody(context.req)),
@@ -44,7 +44,7 @@ export async function actCreateSubscription(context: ApiContext) {
     }
   )
 }
-export async function actCancelSubscription(context: ApiContext) {
+export async function actCancelSubscription(context: Event) {
   const input = cancelSubscriptionSchema.parse(await readRequestBody(context.req))
   return context.json(
     await cancelSubscriptionServices(
@@ -55,7 +55,7 @@ export async function actCancelSubscription(context: ApiContext) {
     { headers: { "content-type": "application/json; charset=UTF-8" } }
   )
 }
-export async function actResumeSubscription(context: ApiContext) {
+export async function actResumeSubscription(context: Event) {
   return context.json(
     await resumeSubscriptionServices(
       uuidSchema.parse(context.req.param("id")!),

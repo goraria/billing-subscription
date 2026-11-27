@@ -6,7 +6,7 @@ import { entitlementsTable, invoiceItemsTable, invoicesTable, subscriptionsTable
 import { ServiceError } from "@/lib/errors"
 import { isProduction } from "@/utils/environment"
 import type { CreatePaymentForInvoiceInput } from "@/schemas/billing"
-import type { AuthContext } from "@/types/auth"
+import type { AuthContext } from "@/utils/interface"
 
 function canManageAll(auth: AuthContext) {
   return auth.user.role === "admin" || auth.user.role === "master"

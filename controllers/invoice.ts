@@ -1,4 +1,4 @@
-import type { ApiContext } from "@/types/auth"
+import type { Event } from "@/utils/interface"
 import { getQueryValues, readRequestBody } from "@/utils/request"
 import {
   createPaymentForInvoiceSchema,
@@ -12,7 +12,7 @@ import {
   rawReconcileInvoicePayment as reconcileInvoicePaymentServices,
 } from "@/models/invoices"
 
-export async function actListInvoices(context: ApiContext) {
+export async function actListInvoices(context: Event) {
   const query = paginationSchema.parse(getQueryValues(context.req.raw))
   return context.json(
     await listInvoicesServices(
@@ -23,7 +23,7 @@ export async function actListInvoices(context: ApiContext) {
     { headers: { "content-type": "application/json; charset=UTF-8" } }
   )
 }
-export async function actGetInvoice(context: ApiContext) {
+export async function actGetInvoice(context: Event) {
   return context.json(
     await getInvoiceServices(
       uuidSchema.parse(context.req.param("id")!),
@@ -32,7 +32,7 @@ export async function actGetInvoice(context: ApiContext) {
     { headers: { "content-type": "application/json; charset=UTF-8" } }
   )
 }
-export async function actCreateInvoicePayment(context: ApiContext) {
+export async function actCreateInvoicePayment(context: Event) {
   return context.json(
     await createInvoicePaymentServices(
       uuidSchema.parse(context.req.param("id")!),
@@ -47,7 +47,7 @@ export async function actCreateInvoicePayment(context: ApiContext) {
     }
   )
 }
-export async function actReconcileInvoicePayment(context: ApiContext) {
+export async function actReconcileInvoicePayment(context: Event) {
   const input = reconcileInvoiceSchema.parse(await readRequestBody(context.req))
   return context.json(
     await reconcileInvoicePaymentServices(

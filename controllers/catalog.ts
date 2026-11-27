@@ -1,4 +1,4 @@
-import type { ApiContext } from "@/types/auth"
+import type { Event } from "@/utils/interface"
 import { getQueryValues, readRequestBody } from "@/utils/request"
 import {
   createFeatureSchema,
@@ -11,13 +11,13 @@ import { rawCreateFeatureManagement as createFeatureServices } from "@/models/bi
 import { rawCreatePlanManagement as createPlanServices } from "@/models/plans"
 import { rawCreatePriceManagement as createPriceServices } from "@/models/prices"
 import { rawCreateProductManagement as createProductServices, rawListCatalog as listCatalogServices } from "@/models/billing-products"
-export async function actListCatalog(context: ApiContext) {
+export async function actListCatalog(context: Event) {
   return context.json(
     await listCatalogServices(listCatalogSchema.parse(getQueryValues(context.req.raw))),
     { headers: { "content-type": "application/json; charset=UTF-8" } }
   )
 }
-export async function actCreateProduct(context: ApiContext) {
+export async function actCreateProduct(context: Event) {
   return context.json(
     await createProductServices(
       createProductSchema.parse(await readRequestBody(context.req))
@@ -28,7 +28,7 @@ export async function actCreateProduct(context: ApiContext) {
     }
   )
 }
-export async function actCreateFeature(context: ApiContext) {
+export async function actCreateFeature(context: Event) {
   return context.json(
     await createFeatureServices(
       createFeatureSchema.parse(await readRequestBody(context.req))
@@ -39,7 +39,7 @@ export async function actCreateFeature(context: ApiContext) {
     }
   )
 }
-export async function actCreatePlan(context: ApiContext) {
+export async function actCreatePlan(context: Event) {
   return context.json(
     await createPlanServices(createPlanSchema.parse(await readRequestBody(context.req))),
     {
@@ -48,7 +48,7 @@ export async function actCreatePlan(context: ApiContext) {
     }
   )
 }
-export async function actCreatePrice(context: ApiContext) {
+export async function actCreatePrice(context: Event) {
   return context.json(
     await createPriceServices(
       createPriceSchema.parse(await readRequestBody(context.req))

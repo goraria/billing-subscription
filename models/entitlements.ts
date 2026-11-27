@@ -1,7 +1,7 @@
 import { and, desc, eq, gt, isNull, lte, or } from "drizzle-orm"
 import { database } from "@/database"
 import { entitlementsTable } from "@/database/schema"
-import { type AuthContext } from "@/types/auth"
+import { type AuthContext } from "@/utils/interface"
 
 export async function rawListEntitlements(application: string | undefined, auth: AuthContext) {
   const now = new Date()

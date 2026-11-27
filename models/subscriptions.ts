@@ -16,7 +16,7 @@ import {
 } from "@/database/schema"
 import { ServiceError } from "@/lib/errors"
 import type { CreateSubscriptionInput, ListSubscriptionInput } from "@/schemas/billing"
-import type { AuthContext } from "@/types/auth"
+import type { AuthContext } from "@/utils/interface"
 import { addBillingInterval as addInterval, billingAmount, initialBillingState } from "@/utils/billing"
 
 function canManageAll(auth: AuthContext) {

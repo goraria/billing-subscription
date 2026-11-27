@@ -1,11 +1,11 @@
-import type { ApiContext } from "@/types/auth"
+import type { Event } from "@/utils/interface"
 import { getQueryValues, readRequestBody } from "@/utils/request"
 import { createMeterSchema, recordUsageSchema } from "@/schemas/billing"
 import { rawCreateMeterManagement as createMeterServices } from "@/models/usage-meters"
 import { rawListEntitlements as listEntitlementsServices } from "@/models/entitlements"
 import { rawRecordUsage as recordUsageServices } from "@/models/usage-records"
 
-export async function actCreateMeter(context: ApiContext) {
+export async function actCreateMeter(context: Event) {
   return context.json(
     await createMeterServices(
       createMeterSchema.parse(await readRequestBody(context.req))
@@ -16,7 +16,7 @@ export async function actCreateMeter(context: ApiContext) {
     }
   )
 }
-export async function actRecordUsage(context: ApiContext) {
+export async function actRecordUsage(context: Event) {
   const result = await recordUsageServices(
     recordUsageSchema.parse(await readRequestBody(context.req)),
     context.req.header("idempotency-key")?.trim() ?? "",
@@ -27,7 +27,7 @@ export async function actRecordUsage(context: ApiContext) {
     headers: { "content-type": "application/json; charset=UTF-8" },
   })
 }
-export async function actListEntitlements(context: ApiContext) {
+export async function actListEntitlements(context: Event) {
   return context.json(
     await listEntitlementsServices(
       getQueryValues(context.req.raw)["application"],

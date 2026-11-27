@@ -3,7 +3,7 @@ import { database } from "@/database"
 import { subscriptionsTable, usageMetersTable, usageRecordsTable } from "@/database/schema"
 import { ServiceError } from "@/lib/errors"
 import { type RecordUsageInput } from "@/schemas/billing"
-import { type AuthContext } from "@/types/auth"
+import { type AuthContext } from "@/utils/interface"
 
 export async function rawRecordUsage(input: RecordUsageInput, idempotencyKey: string, auth: AuthContext) {
   if (!idempotencyKey) throw new ServiceError("invalid_idempotency_key", 400)
