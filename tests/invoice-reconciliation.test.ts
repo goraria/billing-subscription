@@ -3,7 +3,7 @@ const state = vi.hoisted(() => ({
   rows: [] as unknown[][],
   updates: [] as Record<string, unknown>[],
 }))
-vi.mock("@/utils/sso-directory", () => ({
+vi.mock("@/modules/structure/sso-directory", () => ({
   getServiceOrigin: async (key: string) => {
     const origins: Record<string, string> = {"payment":"https://payment.example"};
     if (!origins[key]) throw new Error("Unregistered fixture service");

@@ -1,4 +1,4 @@
-import { getServiceOrigin } from "@/utils/sso-directory";
+import { getServiceOrigin } from "@/modules/structure/sso-directory";
 import { and, count, desc, eq } from "drizzle-orm"
 
 import { database } from "@/database"

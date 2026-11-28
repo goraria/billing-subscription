@@ -1,5 +1,5 @@
 import type { Event } from "@/utils/interface"
-import { getQueryValues, readRequestBody } from "@/utils/request"
+import { getQueryValues, readRequestBody } from "@/modules/principle/request"
 import { createMeterSchema, recordUsageSchema } from "@/schemas/billing"
 import { rawCreateMeterManagement as createMeterServices } from "@/models/usage-meters"
 import { rawListEntitlements as listEntitlementsServices } from "@/models/entitlements"
